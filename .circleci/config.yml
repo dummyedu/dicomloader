@@ -42,8 +42,5 @@ jobs:
       - run: yarn test
 
       - codecov/upload:
-          file: coverage/lconv.info
-
-      - codecov/upload:
           file: coverage/clover.xml
 
