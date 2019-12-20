@@ -35,6 +35,18 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      # run clean
+      - run: yarn clean
+
+      # run check-types
+      - run: yarn run check-types
+
+      # run format:check
+      - run: yarn run format:check
+
+      # run lint
+      - run: yarn lint
+
       # run build
       - run: yarn build
 
@@ -43,4 +55,3 @@ jobs:
 
       - codecov/upload:
           file: coverage/clover.xml
-

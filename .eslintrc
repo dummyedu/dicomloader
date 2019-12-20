@@ -1,6 +1,16 @@
 {
-  "extends": ["airbnb-typescript/base"],
-  "parser": "babel-eslint",
+  "extends": ["airbnb-typescript/base", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      "typescript": {}
+    }
+  },
   "rules": {
     "import/prefer-default-export": "never"
   },
@@ -15,7 +25,15 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "error"
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": true,
+            "argsIgnorePattern": "^_" // ignore unused variables whose name is '_'
+          }
+        ]
       }
     }
   ]
