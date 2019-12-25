@@ -4,7 +4,7 @@
   "plugins": ["@typescript-eslint"],
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts"]
     },
     "import/resolver": {
       // use <root>/tsconfig.json

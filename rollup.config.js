@@ -6,12 +6,10 @@ import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
-const BABEL_RUNTIME = '@babel/runtime';
-
 const extensions = ['.ts'];
 const noDeclarationFiles = { compilerOptions: { declaration: false } };
 
-const babelRuntimeVersion = pkg.dependencies[BABEL_RUNTIME].replace(
+const babelRuntimeVersion = pkg.dependencies['@babel/runtime'].replace(
   /^[^0-9]*/,
   '',
 );
@@ -30,7 +28,7 @@ export default [
     input: 'src/index.ts',
     output: { file: 'lib/dicomloader.js', format: 'cjs', indent: false },
     external: makeExternalPredicate([
-      BABEL_RUNTIME,
+      ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ]),
     plugins: [
@@ -53,7 +51,7 @@ export default [
     input: 'src/index.ts',
     output: { file: 'es/dicomloader.js', format: 'es', indent: false },
     external: makeExternalPredicate([
-      BABEL_RUNTIME,
+      ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ]),
     plugins: [
