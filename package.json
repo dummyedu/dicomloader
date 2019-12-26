@@ -24,7 +24,8 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:cov": "npm test -- --coverage",
-    "build": "yarn clean && yarn run check-types && yarn run format:check && yarn lint && rollup -c"
+    "prebuild": "yarn clean && yarn run check-types && yarn run format:check && yarn lint",
+    "build": "rollup -c"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
