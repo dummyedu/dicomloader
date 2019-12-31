@@ -1,31 +1,25 @@
+const { NODE_ENV } = process.env;
+
 module.exports = {
   presets: [
+    '@babel/typescript',
     [
-      '@babel/preset-env',
+      '@babel/env',
       {
-        useBuiltIns: 'false',
-        corejs: 'core-js@3',
         targets: {
-          chrome: 68,
+          browsers: ['ie >= 11'],
         },
-      },
-    ],
-    '@babel/preset-typescript',
-  ],
-  plugins: [
-    ['@babel/plugin-proposal-decorators', { legacy: true }],
-    [
-      '@babel/plugin-proposal-class-properties',
-      {
+        exclude: ['transform-async-to-generator', 'transform-regenerator'],
+        modules: false,
         loose: true,
       },
     ],
+  ],
+  plugins: [
+    // don't use `loose` mode here - need to copy symbols when spreading
+    '@babel/proposal-object-rest-spread',
     '@babel/plugin-syntax-dynamic-import',
-  ],
-  overrides: [
-    {
-      test: /\.ts$/,
-      plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
-    },
-  ],
+    '@babel/plugin-proposal-class-properties',
+    NODE_ENV === 'test' && '@babel/transform-modules-commonjs',
+  ].filter(Boolean),
 };

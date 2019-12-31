@@ -21,6 +21,9 @@ Thumbs.db
 desktop.ini
 
 lib/
+dist/
+es/
+types/
 testassets/generated/
 .history
 tmp/
